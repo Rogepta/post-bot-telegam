@@ -7,8 +7,9 @@ on:
     - cron: '0 3,7,9,12,15,18,21 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
+concurrency:
+  group: esports-bot
+  cancel-in-progress: false
 
 jobs:
   post_news:
@@ -18,8 +19,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Restore database from cache
+        uses: actions/cache@v4
+        id: cache-db
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          path: posted_articles.db
+          key: esports-db-${{ github.run_id }}
+          restore-keys: |
+            esports-db-
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -55,11 +63,9 @@ jobs:
             sqlite3 posted_articles.db "SELECT COUNT(*) FROM posted_articles;"
           fi
 
-      - name: Commit state
-        run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add posted_articles.db 2>/dev/null || true
-          git add block_esports_poster.log 2>/dev/null || true
-          git diff --staged --quiet || git commit -m "🤖 Update database [skip ci]"
-          git push || (git pull --rebase && git push)
+      - name: Save database to cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: posted_articles.db
+          key: esports-db-${{ github.run_id }}
