@@ -1,47 +1,46 @@
-# 🤖 AI News Poster v12.0
+# 🎮 Esports News Poster
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Groq API](https://img.shields.io/badge/Groq-AI%20Powered-orange)](https://groq.com/)
+[![Groq API](https://img.shields.io/badge/Groq-Powered-orange)](https://groq.com/)
 [![Telegram Bot](https://img.shields.io/badge/Telegram-Bot-blue)](https://core.telegram.org/bots)
 
-**Интеллектуальная система автоматической публикации AI-новостей** с продвинутой дедупликацией, умной фильтрацией и генерацией контента через Groq LLM.
+**Интеллектуальная система автоматической публикации киберспортивных новостей** с продвинутой дедупликацией, умной фильтрацией и генерацией контента через Groq LLM.
 
 ---
 
 ## 🎬 Демонстрация
 
 ```
-🚀 AI-POSTER v12.0 (Smart Subject + No Rejected Block + HOWTO Filter)
+🚀 ESPORTS-POSTER
 ============================================================
 📥 Загрузка RSS...
-  ✅ TechCrunch AI: 18
-  ✅ VentureBeat AI: 22
-  ✅ The Decoder: 15
-  ✅ Kod.ru: 12
+  ✅ HLTV: 15
+  ✅ Dot Esports: 20
+  ✅ Escorenews: 12
+  ✅ Cybersport.ru: 18
 📦 Всего: 147
 
 🔍 Фильтрация...
-  ✅ PASS (ai=8, prio=0, subj=openai): OpenAI announces GPT-5...
-  🚫 CORPORATE: Meta CEO steps down amid controversy...
-  🛒 SHOPPING: Best Black Friday deals on laptops...
-  📢 PROMO: Subscribe to our AI newsletter...
-  ✅ PASS (ai=6, prio=3, subj=telegram): Telegram launches AI bot...
+  ✅ PASS (esports=8): Team Spirit wins The International...
+  🏢 BUSINESS: New CEO at gaming company...
+  📢 PROMO: Subscribe to our newsletter...
+  ✅ PASS (esports=6): NAVI announces roster changes...
 
 📊 Итоги фильтрации:
    filtered=87, batch_dup=15, db_dup=23, diversity=4, same_subject=3, passed=15
 ✅ Кандидатов: 15 из 147
 
 🎯 Топ кандидаты:
-  1. [ai=8, subj=openai] [TechCrunch AI] OpenAI announces GPT-5 preview...
-  2. [ai=7, subj=anthropic] [The Decoder] Claude 4 breaks benchmark...
-  3. [ai=6, subj=telegram] [Kod.ru] Telegram запускает AI-помощника...
+  1. [es=8] [HLTV] FaZe Clan wins IEM Katowice...
+  2. [es=7] [Dot Esports] New Dota 2 patch notes released...
+  3. [es=6] [Cybersport.ru] Обновление баланса в CS2...
 
-📝 Генерация: OpenAI announces GPT-5 preview...
+📝 Генерация: FaZe Clan wins IEM Katowice...
   🤖 llama-3.3-70b-versatile (попытка 1)
   ✅ [llama-3.3-70b-versatile]: 876 симв.
   📤 Отправка поста...
-✅ ОПУБЛИКОВАНО [llm][openai][TechCrunch AI]: OpenAI announces GPT-5...
+✅ ОПУБЛИКОВАНО [cs][HLTV]: FaZe Clan wins IEM Katowice...
 
 🏁 Готово!
 ```
@@ -51,9 +50,9 @@
 ## ✨ Ключевые возможности
 
 ### 🧠 **Интеллектуальная фильтрация**
-- ✅ **15+ категорий контента** (AI-релизы, исследования, инструменты)
-- ❌ **Автоматическое удаление** корпоративных новостей, шоппинга, инструкций
-- 🎯 **Приоритизация** по AI-релевантности + Telegram-тематике
+- ✅ **Игровые дисциплины**: Dota 2, CS2, Valorant, Overwatch, Fortnite и др.
+- ❌ **Автоматическое удаление** корпоративных новостей, промо, вакансий
+- 🎯 **Приоритизация** по киберспортивной релевантности
 - 🔍 **Детекция промо-контента** (рассылки, вебинары, акции)
 
 ### 🔄 **Продвинутая дедупликация**
@@ -69,15 +68,15 @@
 - 📝 **Word signature** (отсортированные уникальные слова)
 
 ### 🎨 **Умная классификация**
-- 🏷️ **Topics**: LLM, Image Gen, Robotics, Hardware, Messenger, General
-- 🎯 **Subjects**: OpenAI, Google, Anthropic, Meta, Nvidia, Telegram, etc.
+- 🏷️ **Topics**: Dota 2, CS2, Valorant, Esports, Patches, General
+- 🎯 **Subjects**: Team Spirit, NAVI, Virtus.pro, FaZe, G2, etc.
 - 📅 **Freshness control**: макс. 72 часа с публикации
 - 🌈 **Diversity engine**:
   - Не более 2 постов на одну тему в последних 7
   - Блок последовательных постов из одного источника
   - Защита от флуда одной компанией (max 8 часов между постами)
 
-### 🤖 **AI-генерация через Groq**
+### 🤖 **Генерация через Groq**
 - 🔄 **Fallback chain**: llama-3.3-70b → llama-3.1-8b
 - 📏 **Умная валидация**:
   - Минимум 450 символов
@@ -107,8 +106,8 @@ SQLite3 (встроен в Python)
 
 ```bash
 # 1. Клонирование
-git clone https://github.com/yourusername/ai-news-poster.git
-cd ai-news-poster
+git clone https://github.com/yourusername/esports-news-poster.git
+cd esports-news-poster
 
 # 2. Виртуальное окружение
 python3 -m venv venv
@@ -122,7 +121,7 @@ cp .env.example .env
 nano .env  # Заполните GROQ_API_KEY, TELEGRAM_BOT_TOKEN, CHANNEL_ID
 
 # 5. Запуск
-python ai_poster.py
+python telegrambot.py
 ```
 
 ### requirements.txt
@@ -165,7 +164,7 @@ class Config:
     # Валидация контента
     min_post_length = 450              # минимум символов
     max_article_age_hours = 72         # макс. возраст новости
-    min_ai_score = 2                   # минимум AI-релевантности
+    min_esports_score = 2              # минимум киберспорт-релевантности
     
     # Diversity
     diversity_window = 7               # последние N постов
@@ -198,7 +197,7 @@ class Config:
        ▼
 ┌──────────────────────────────┐
 │ Relevance Filter             │
-│ • AI keyword scoring         │
+│ • Esports keyword scoring    │
 │ • Exclude (crypto, sports)   │
 │ • Promo/shopping detection   │
 │ • Corporate news filter      │
@@ -231,7 +230,7 @@ class Config:
        ▼
 ┌──────────────────────────────┐
 │ Scoring & Sorting            │
-│ Score = ai*3 + priority*5 +  │
+│ Score = esports*3 + priority*5 │
 │   entities + freshness*2 -   │
 │   source_penalty -           │
 │   subject_penalty            │
@@ -239,7 +238,7 @@ class Config:
        │
        ▼
 ┌──────────────────────────────┐
-│ AI Generation (Groq)         │
+│ Generation (Groq)             │
 │ • llama-3.3-70b-versatile    │
 │ • llama-3.1-8b-instant       │
 │ • Retry with backoff         │
@@ -342,8 +341,8 @@ def normalize_url(url: str) -> str:
 ### 2. **Title Similarity (difflib)**
 
 ```python
-# "OpenAI launches GPT-5"
-# "OpenAI launches GPT-5 preview"
+# "Team Spirit wins The International 2025"
+# "Team Spirit takes The International 2025"
 # → 0.92 (дубликат при threshold=0.55)
 
 sim = difflib.SequenceMatcher(None, title1.lower(), title2.lower()).ratio()
@@ -352,8 +351,8 @@ sim = difflib.SequenceMatcher(None, title1.lower(), title2.lower()).ratio()
 ### 3. **N-gram Similarity**
 
 ```python
-# "Meta releases Llama 3"
-# "Meta unveils Llama 3.1"
+# "Team Spirit wins The International"
+# "Team Spirit claims TI victory"
 # Биграммы: {"meta releases", "releases llama", "llama 3"}
 #          vs {"meta unveils", "unveils llama", "llama 3"}
 # Jaccard = 1/5 = 0.20 (не дубликат)
@@ -366,9 +365,9 @@ jaccard = len(ngrams1 & ngrams2) / len(ngrams1 | ngrams2)
 ### 4. **Word Signature**
 
 ```python
-# "Google AI announces new Gemini model"
-# "New Gemini AI model from Google announced"
-# Signature: "ai announced gemini google model new"
+# "Valorant announces new agent"
+# "New Valorant agent announced"
+# Signature: "agent announced new valorant"
 # → Exact match!
 
 words = get_title_words(title)  # без стоп-слов
@@ -378,8 +377,8 @@ signature = ' '.join(sorted(words))
 ### 5. **Entity Overlap**
 
 ```python
-# "OpenAI and Microsoft partner on GPT-4"
-# "Microsoft collaborates with OpenAI on GPT-4 deployment"
+# "Virtus.pro signs new roster"
+# "Virtus.pro announces new lineup for 2025"
 # Entities: {openai, microsoft, gpt-4} ∩ {microsoft, openai, gpt-4}
 # Overlap = 3/3 = 1.0 (дубликат)
 
@@ -403,26 +402,26 @@ if domain1 == domain2:
 
 ## 🎯 Фильтры контента
 
-### **AI Relevance Score**
+### **Esports Relevance Score**
 
 ```python
-def ai_relevance_score(text: str) -> int:
+def esports_relevance_score(text: str) -> int:
     score = 0
     
     # Сильные ключевые слова (+2 каждое)
-    for kw in AI_KEYWORDS_STRONG:  # "chatgpt", "llm", "neural network"
+    for kw in ESPORTS_KEYWORDS_STRONG:  # "киберспорт", "dota 2", "cs2"
         if kw in text.lower():
             score += 2
     
     # Слабые ключевые слова (+1 каждое)
-    for kw in AI_KEYWORDS_WEAK:  # "ai", "copilot", "nvidia"
+    for kw in ESPORTS_KEYWORDS_WEAK:  # "игра", "геймер", "шутер"
         if kw in text.lower():
             score += 1
     
     return score
 
 # Примеры:
-# "OpenAI releases ChatGPT-5" → 4 (chatgpt+2, openai+1, releases+0, gpt+1)
+# "NAVI wins IEM Katowice 2025" → 4 (navi+2, iem+2)
 # "Best laptop deals" → 0 (отклоняется)
 ```
 
@@ -459,16 +458,16 @@ def is_shopping_content(text: str) -> bool:
         "drops to $", "where to buy"
     ]
     
-    # Если есть цена + продуктовые слова (и мало AI-слов)
-    if re.search(r'\$\d+', text) and ai_relevance_score(text) < 4:
+    # Если есть цена + продуктовые слова (и мало игровых слов)
+    if re.search(r'\$\d+', text) and esports_relevance_score(text) < 4:
         product_words = ["phone", "laptop", "earbuds", "specs"]
         if any(w in text.lower() for w in product_words):
             return True
     
     return False
 
-# ❌ "AirPods Pro 2 drop to $199 in Black Friday sale"
-# ✅ "OpenAI announces $20/month ChatGPT Plus subscription"
+# ❌ "Gaming chair on sale for $199"
+# ✅ "NAVI announces $1M roster changes"
 ```
 
 ### **Promo Content Detection**
@@ -488,18 +487,18 @@ def is_promo_content(text: str) -> bool:
     title_promos = ["launches newsletter", "new podcast", "подпишитесь"]
     return any(p in text.lower() for p in title_promos)
 
-# ❌ "TechCrunch launches new AI newsletter — subscribe now"
-# ✅ "TechCrunch: OpenAI launches new reasoning model"
+# ❌ "Subscribe to our esports newsletter"
+# ✅ "ESL announces new tournament format"
 ```
 
 ---
 
-## 🤖 AI-генерация (Groq)
+## 🤖 Генерация (Groq)
 
 ### Промпт-инжиниринг
 
 ```python
-prompt = f"""Ты — редактор Telegram-канала про AI-технологии для аудитории из РФ и СНГ.
+prompt = f"""Ты — редактор Telegram-канала про киберспорт и видеоигры для аудитории из РФ и СНГ.
 
 НОВОСТЬ:
 Заголовок: {article.title}
@@ -508,9 +507,9 @@ prompt = f"""Ты — редактор Telegram-канала про AI-техн�
 ЗАДАЧА: Напиши пост для Telegram-канала.
 
 ФОКУС КАНАЛА — только это:
-🟢 Новые AI-модели (GPT-5, Claude 4, Gemini 2)
-🟢 Прорывы в исследованиях (бенчмарки)
-🟢 Практическое применение AI
+🟢 Киберспортивные турниры (Dota 2, CS2, Valorant)
+🟢 Обновления и патчи
+🟢 Трансферы и изменения составов
 
 НЕ ПОДХОДИТ — ответь SKIP:
 🔴 Кадровые перестановки
@@ -573,12 +572,12 @@ for model in GROQ_MODELS:
 ```python
 class Topic:
     HASHTAGS = {
-        "llm": "#ChatGPT #LLM #OpenAI #нейросети",
+        "cs": "#CS2 #CSGO #контрстрайк",
         "image_gen": "#Midjourney #StableDiffusion #ИИАрт",
         "robotics": "#роботы #робототехника",
         "hardware": "#NVIDIA #GPU #чипы",
         "messenger": "#Telegram #мессенджеры #боты",
-        "general": "#ИИ #технологии #AI"
+        "general": "#игры #гейминг #видеоигры"
     }
     
     @staticmethod
@@ -604,8 +603,8 @@ class Topic:
 def score(article: Article) -> float:
     text = f"{article.title} {article.summary}"
     
-    # 1. AI-релевантность (x3)
-    ai_score = ai_relevance_score(text)
+    # 1. Киберспорт-релевантность (x3)
+    esports_score = esports_relevance_score(text)
     
     # 2. Приоритет (Telegram-тематика x5)
     priority_score = priority_score(text)
@@ -621,26 +620,26 @@ def score(article: Article) -> float:
     source_penalty = count_same_source(article.source) * 3
     subject_penalty = count_same_subject(detect_subject(text)) * 2
     
-    return (ai_score * 3 + priority_score * 5 + len(entities) + 
+    return (esports_score * 3 + priority_score * 5 + len(entities) + 
             freshness - source_penalty - subject_penalty)
 ```
 
 ### Примеры скоринга
 
 ```python
-# "Telegram launches AI chatbot with 100M users"
-# ai=6 (telegram, chatbot, ai), priority=3 (telegram), entities=1,
-# freshness=2, penalties=0
-# Score = 6*3 + 3*5 + 1 + 2 = 38 ⭐⭐⭐
-
-# "OpenAI announces GPT-5 with reasoning capabilities"
-# ai=8 (openai, gpt-5, reasoning), priority=0, entities=2 (openai, gpt-5),
+# "NAVI wins IEM Katowice 2025"
+# es=10 (navi, iem, katowice, турнир, финал), entities=2,
 # freshness=1.5, penalties=0
-# Score = 8*3 + 0*5 + 2 + 1.5 = 27.5 ⭐⭐
+# Score = 10*3 + 0 + 2 + 1.5 = 33.5 ⭐⭐⭐
 
-# "Best gaming laptops with NVIDIA GPUs"
-# ai=1 (nvidia), priority=0, entities=1, freshness=0, penalties=0
-# Score = 1*3 + 0 + 1 + 0 = 4 ❌ (отклоняется)
+# "Dota 2 patch 7.38 — balance changes and new hero"
+# es=8 (dota 2, патч, баланс, герой), entities=1,
+# freshness=2, penalties=0
+# Score = 8*3 + 0 + 1 + 2 = 27 ⭐⭐
+
+# "New gaming laptop with RTX 5090"
+# es=0, priority=0, entities=1, freshness=0, penalties=0
+# Score = 0 + 0 + 1 + 0 = 1 ❌ (отклоняется)
 ```
 
 ---
@@ -654,7 +653,7 @@ RSS_FEEDS = [
     # ...существующие...
     
     # Новый источник
-    ("https://example.com/ai/feed/", "Example AI Blog"),
+    ("https://example.com/esports/feed/", "Example Esports Blog"),
 ]
 ```
 
@@ -664,7 +663,7 @@ RSS_FEEDS = [
 # В списке HARD_EXCLUDE_KEYWORDS
 HARD_EXCLUDE_KEYWORDS = [
     # ...
-    "quantum computing",  # Исключить квантовые вычисления
+    "quantum computing",  # Исключить неигровое
 ]
 
 # Или создать функцию
@@ -700,7 +699,7 @@ class Config:
 
 ```yaml
 # .github/workflows/post.yml
-name: AI News Poster
+name: Esports News Poster
 
 on:
   schedule:
@@ -728,7 +727,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
-        run: python ai_poster.py
+        run: python telegrambot.py
       
       - name: Upload DB
         uses: actions/upload-artifact@v3
@@ -749,44 +748,44 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Код
-COPY ai_poster.py .
+COPY telegrambot.py .
 
 # База данных (volume)
 VOLUME /app/data
 
-CMD ["python", "ai_poster.py"]
+CMD ["python", "telegrambot.py"]
 ```
 
 ```bash
 # Сборка
-docker build -t ai-poster .
+docker build -t esports-poster .
 
 # Запуск
 docker run -d \
-  --name ai-poster \
+  --name esports-poster \
   -v $(pwd)/data:/app/data \
   -e GROQ_API_KEY=xxx \
   -e TELEGRAM_BOT_TOKEN=xxx \
   -e CHANNEL_ID=@channel \
-  ai-poster
+  esports-poster
 ```
 
 ### Systemd Service
 
 ```ini
-# /etc/systemd/system/ai-poster.service
+# /etc/systemd/system/esports-poster.service
 [Unit]
-Description=AI News Poster
+Description=Esports News Poster
 After=network.target
 
 [Service]
 Type=simple
 User=aiposter
-WorkingDirectory=/opt/ai-poster
+WorkingDirectory=/opt/esports-poster
 Environment="GROQ_API_KEY=xxx"
 Environment="TELEGRAM_BOT_TOKEN=xxx"
 Environment="CHANNEL_ID=@channel"
-ExecStart=/usr/bin/python3 ai_poster.py
+ExecStart=/usr/bin/python3 telegrambot.py
 Restart=on-failure
 RestartSec=3600
 
@@ -796,18 +795,18 @@ WantedBy=multi-user.target
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable ai-poster
-sudo systemctl start ai-poster
+sudo systemctl enable esports-poster
+sudo systemctl start esports-poster
 
 # Логи
-journalctl -u ai-poster -f
+journalctl -u esports-poster -f
 ```
 
 ### Cron (простой способ)
 
 ```bash
 # crontab -e
-0 */6 * * * cd /opt/ai-poster && /usr/bin/python3 ai_poster.py >> /var/log/ai-poster.log 2>&1
+0 */6 * * * cd /opt/esports-poster && /usr/bin/python3 telegrambot.py >> /var/log/esports-poster.log 2>&1
 ```
 
 ---
@@ -817,18 +816,18 @@ journalctl -u ai-poster -f
 ### Проблема: "Все статьи отфильтровываются"
 
 ```bash
-# Проверка AI-скоринга
+# Проверка киберспорт-скоринга
 python3 << EOF
-from ai_poster import ai_relevance_score
+from esports_poster import esports_relevance_score
 
 text = "Your article title and summary"
-score = ai_relevance_score(text)
-print(f"AI Score: {score} (min required: 2)")
+score = esports_relevance_score(text)
+print(f"Esports Score: {score} (min required: 2)")
 EOF
 
 # Временно снизить порог
 # В Config:
-min_ai_score = 1  # вместо 2
+min_esports_score = 1  # вместо 2
 ```
 
 ### Проблема: "Groq API rate limit"
@@ -861,7 +860,7 @@ rm posted_articles.db-shm posted_articles.db-wal
 
 ```python
 # Проверка нормализации
-from ai_poster import normalize_url, normalize_title
+from telegrambot import normalize_url, normalize_title
 
 url1 = "https://www.example.com/article?utm_source=twitter"
 url2 = "http://example.com/article"
@@ -895,15 +894,15 @@ result = manager.is_duplicate(url, title, summary)
 # → DuplicateCheckResult(is_duplicate=bool, reasons=[...], max_similarity=float)
 
 # Проверка свежести темы
-ok, reason = manager.check_subject_freshness("openai", title)
+ok, reason = manager.check_subject_freshness("navi", title)
 # → (False, "SAME_SUBJECT (openai, 4h ago): Previous title...")
 
 # Проверка разнообразия
-ok, reason = manager.check_diversity("llm", "TechCrunch AI")
+ok, reason = manager.check_diversity("cs", "HLTV")
 # → (False, "SAME_AS_LAST: llm")
 
 # Добавление статьи
-success = manager.add(article, topic="llm", subject="openai")
+success = manager.add(article, topic="dota", subject="team_spirit")
 # → True
 
 # Статистика
@@ -928,42 +927,42 @@ get_domain("https://techcrunch.com/2024/article")
 # → "techcrunch.com"
 
 # Title
-normalize_title("OpenAI Launches GPT-5!")
-# → "openai launches gpt5"
+normalize_title("Team Spirit Wins The International 2025!")
+# → "team spirit wins the international 2025"
 
-get_title_words("The new AI model from Google")
-# → frozenset({'new', 'ai', 'model', 'google'})
+get_title_words("NAVI wins IEM Katowice 2025")
+# → frozenset({'navi', 'wins', 'iem', 'katowice', '2025'})
 
-get_sorted_word_signature("New Google AI model")
-# → "ai google model new"
+get_sorted_word_signature("NAVI wins IEM Katowice")
+# → "iem katowice navi wins"
 
 # Similarity
-calculate_similarity("GPT-5 announced", "GPT-5 announcement")
-# → 0.92
+calculate_similarity("FaZe wins IEM", "FaZe takes IEM title")
+# → 0.85
 
-jaccard_similarity({'ai', 'model'}, {'ai', 'system'})
+jaccard_similarity({'dota', 'patch'}, {'dota', 'update'})
 # → 0.33
 
-ngram_similarity("Meta releases Llama 3", "Meta unveils Llama 3.1")
-# → 0.40
+ngram_similarity("Team Spirit wins TI", "Team Spirit claims TI trophy")
+# → 0.50
 
 # Entities
-extract_entities("OpenAI and Microsoft partner on GPT-4")
-# → {'openai', 'microsoft', 'gpt-4'}
+extract_entities("Virtus.pro signs new Dota 2 roster")
+# → {'virtus.pro', 'dota 2'}
 
 # Scoring
-ai_relevance_score("ChatGPT-5 with multimodal reasoning")
-# → 6
+esports_relevance_score("NAVI wins IEM Katowice 2025")
+# → 10
 
-priority_score("Telegram launches AI bot")
-# → 3
+priority_score("New CS2 patch notes released")
+# → 0
 
 # Topics
-Topic.detect("OpenAI releases GPT-5 with reasoning")
-# → "llm"
+Topic.detect("Team Spirit wins The International 2025")
+# → "dota"
 
-detect_subject("Google announces Gemini 2.0")
-# → "google"
+detect_subject("NAVI announces roster changes")
+# → "navi"
 ```
 
 ---
@@ -973,13 +972,13 @@ detect_subject("Google announces Gemini 2.0")
 ### Логирование
 
 ```python
-# ai_poster.log
-2024-01-15 14:30:00 | INFO | 📥 Загрузка RSS...
-2024-01-15 14:30:05 | INFO |   ✅ TechCrunch AI: 18
-2024-01-15 14:30:10 | INFO | 🔍 Фильтрация...
-2024-01-15 14:30:11 | INFO |   ✅ PASS (ai=8, prio=0, subj=openai): OpenAI announces...
-2024-01-15 14:30:12 | INFO |   🚫 CORPORATE: Meta CEO steps down...
-2024-01-15 14:30:30 | INFO | ✅ ОПУБЛИКОВАНО [llm][openai][TechCrunch AI]: OpenAI announces...
+# block_esports_poster.log
+2025-06-20 14:30:00 | INFO | 📥 Загрузка RSS...
+2025-06-20 14:30:05 | INFO |   ✅ HLTV: 18
+2025-06-20 14:30:10 | INFO | 🔍 Фильтрация...
+2025-06-20 14:30:11 | INFO |   ✅ PASS (es=8): NAVI wins IEM Katowice...
+2025-06-20 14:30:12 | INFO |   🚫 CORPORATE: New CEO at gaming company...
+2025-06-20 14:30:30 | INFO | ✅ ОПУБЛИКОВАНО [cs][HLTV]: FaZe Clan wins IEM...
 ```
 
 ### Статистика из БД
@@ -1002,8 +1001,8 @@ SELECT COUNT(*)
 FROM posted_articles 
 WHERE posted_date >= datetime('now', '-7 days');
 
-# Средний AI-скор отклонённых
--- Требует добавить колонку ai_score в rejected_urls
+# Средний киберспорт-скор отклонённых
+-- Требует добавить колонку esports_score в rejected_urls
 ```
 
 ### Prometheus Metrics (опционально)
@@ -1011,9 +1010,9 @@ WHERE posted_date >= datetime('now', '-7 days');
 ```python
 from prometheus_client import Counter, Histogram, start_http_server
 
-posts_total = Counter('ai_poster_posts_total', 'Total posts published')
-duplicates_total = Counter('ai_poster_duplicates_total', 'Duplicates detected')
-generation_time = Histogram('ai_poster_generation_seconds', 'Time to generate post')
+posts_total = Counter('esports_poster_posts_total', 'Total posts published')
+duplicates_total = Counter('esports_poster_duplicates_total', 'Duplicates detected')
+generation_time = Histogram('esports_poster_generation_seconds', 'Time to generate post')
 
 # В коде
 posts_total.inc()
@@ -1030,47 +1029,42 @@ start_http_server(8000)
 
 ## 🎨 Примеры постов
 
-### LLM Topic
+### Dota 2 Topic
 
 ```
-🔥 OpenAI выпустила GPT-5 с режимом глубокого мышления
+🔥 Team Spirit стала чемпионом The International 2025
 
-Сегодня ночью OpenAI представила GPT-5 — новую флагманскую модель с поддержкой режима "deep thinking". Ключевые фичи:
+Team Spirit обыграла Gaimin Gladiators со счётом 3:1 в гранд-финале The International 2025. Ключевые моменты:
 
-• 📊 +40% точности на MMLU по сравнению с GPT-4
-• 🧠 Режим reasoning: модель "думает" до 60 секунд перед ответом
-• 💻 Нативная поддержка кода на 50+ языках программирования
+• 🏆 Призовой фонд: $15 млн
+• 🌟 Yatoro признан MVP турнира
+• 💥 Collapse показал легендарный Timbersaw в решающей карте
 
-В чём польза: теперь ChatGPT сможет решать сложные математические задачи и писать production-ready код практически без ошибок. Доступен пользователям Plus ($20/мес) и API-разработчикам.
-
-Особенно интересно применение в образовании — модель может пошагово объяснять решение задач по физике и химии.
+Team Spirit забирает второй Aegis в своей истории, повторяя успех 2021 года. Состав показал невероятную стабильность на протяжении всего турнира.
 
 🔥 — огонь  |  🗿 — мимо  |  ⚡ — интересно
 
-#ChatGPT #LLM #OpenAI #нейросети
+#Dota2 #дота2 #киберспорт
 
 🔗 Источник
 ```
 
-### Messenger Topic
+### CS2 Topic
 
 ```
-🚀 Telegram запустил AI-помощника для создания ботов без кода
+🔥 NAVI выигрывает IEM Katowice 2025
 
-Telegram сегодня анонсировал BotFather AI — инструмент для создания ботов через разговор с нейросетью. Просто объясняешь голосом или текстом, что нужно, и система генерирует код.
+NAVI разгромила FaZe Clan со счётом 2:0 в финале IEM Katowice 2025. Ключевые моменты:
 
-Возможности:
-• 🤖 Создание ботов за 5 минут вместо 5 часов
-• 🎨 Автогенерация интерфейсов и меню
-• 📊 Интеграция с базами данных и API
+• 🏆 Третий титул NAVI в сезоне
+• 🌟 jL признан MVP турнира
+• 💥 Сенсационная игра b1t на Mirage
 
-Уже доступно в бета-версии для Premium-пользователей. Дуров пообещал, что через месяц функция станет бесплатной для всех.
-
-Это реально упрощает жизнь: раньше для бота нужно было знать Python, теперь достаточно описать логику на русском.
+Польский зал стоя аплодировал новой команде. NAVI показывает лучшую игру в своей истории.
 
 🔥 — огонь  |  🗿 — мимо  |  ⚡ — интересно
 
-#Telegram #мессенджеры #боты
+#CS2 #CSGO #контрстрайк
 
 🔗 Источник
 ```
@@ -1083,20 +1077,20 @@ Telegram сегодня анонсировал BotFather AI — инструме
 
 ```python
 # 1. Создать функцию в секции FILTERS
-def is_blockchain_news(text: str) -> bool:
-    blockchain_keywords = ["blockchain", "web3", "defi", "nft"]
-    count = sum(1 for kw in blockchain_keywords if kw in text.lower())
-    return count >= 2
+def is_hardware_news(text: str) -> bool:
+    hardware_keywords = ["gpu", "rtx", "processor", "amd", "intel"]
+    count = sum(1 for kw in hardware_keywords if kw in text.lower())
+    return count >= 3 and not any(kw in text.lower() for kw in ESPORTS_KEYWORDS_STRONG)
 
 # 2. Добавить в is_relevant()
-if is_blockchain_news(text):
-    logger.info(f"  🚫 BLOCKCHAIN: {article.title[:50]}")
+if is_hardware_news(text):
+    logger.info(f"  🚫 HARDWARE: {article.title[:50]}")
     return False
 
 # 3. Протестировать
 test_article = Article(
-    title="New blockchain AI integration",
-    summary="Web3 platform integrates ChatGPT...",
+    title="New RTX 5090 benchmark results",
+    summary="NVIDIA's latest GPU shows 50% improvement...",
     link="https://example.com/test",
     source="Test"
 )
@@ -1109,7 +1103,7 @@ assert not is_relevant(test_article)
 2. **Создать ветку**: `git checkout -b feature/new-filter`
 3. **Добавить тесты** для новой функциональности
 4. **Обновить README** с примерами
-5. **Commit**: `git commit -m "Add blockchain news filter"`
+5. **Commit**: `git commit -m "Add hardware news filter"`
 6. **Push**: `git push origin feature/new-filter`
 7. **Открыть PR** с описанием изменений
 
@@ -1139,7 +1133,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 
 ## 📞 Поддержка
 
-- **GitHub Issues**: [Создать issue](https://github.com/yourusername/ai-news-poster/issues)
+- **GitHub Issues**: [Создать issue](https://github.com/yourusername/esports-news-poster/issues)
 - **Telegram**: [@your_username](https://t.me/your_username)
 - **Email**: your@email.com
 
@@ -1164,8 +1158,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 
 ```python
 # Пример пошагового разбора
-article1 = "OpenAI launches GPT-5"
-article2 = "OpenAI launches GPT-5 preview version"
+article1 = "Team Spirit wins The International"
+article2 = "Team Spirit wins The International 2025"
 
 # Шаг 1: Title Similarity
 sim = difflib.SequenceMatcher(None, 
@@ -1175,14 +1169,14 @@ sim = difflib.SequenceMatcher(None,
 # → 0.92 > threshold (0.55) → ДУБЛИКАТ
 
 # Шаг 2: N-gram
-ngrams1 = {"openai launches", "launches gpt5"}
-ngrams2 = {"openai launches", "launches gpt5", "gpt5 preview"}
+ngrams1 = {"team spirit wins", "spirit wins the", "wins the international"}
+ngrams2 = {"team spirit wins", "spirit wins the", "wins the international", "the international 2025"}
 jaccard = len(ngrams1 & ngrams2) / len(ngrams1 | ngrams2)
 # → 2/3 = 0.67 > threshold (0.40) → ДУБЛИКАТ
 
 # Шаг 3: Entity Overlap
-entities1 = {"openai", "gpt-5"}
-entities2 = {"openai", "gpt-5"}
+entities1 = {"team spirit", "the international"}
+entities2 = {"team spirit", "the international"}
 overlap = len(entities1 & entities2) / min(len(entities1), len(entities2))
 # → 2/2 = 1.0 > threshold (0.45) → ДУБЛИКАТ
 ```
@@ -1194,8 +1188,8 @@ overlap = len(entities1 & entities2) / min(len(entities1), len(entities2))
 STOP_WORDS_DE = {'der', 'die', 'das', 'und', 'ist', ...}
 
 # 2. Добавить ключевые слова
-AI_KEYWORDS_STRONG_DE = [
-    "künstliche intelligenz", "maschinelles lernen", ...
+ESPORTS_KEYWORDS_STRONG_DE = [
+    "e-sport", "turnier", "meisterschaft", ...
 ]
 
 # 3. Создать функцию детекции языка
@@ -1219,9 +1213,9 @@ def normalize_title(title: str, lang: str = None) -> str:
 
 <div align="center">
 
-**Сделано с ❤️ для автоматизации AI-новостей**
+**Сделано с ❤️ для автоматизации киберспортивных новостей**
 
-[![Star on GitHub](https://img.shields.io/github/stars/yourusername/ai-news-poster?style=social)](https://github.com/yourusername/ai-news-poster)
+[![Star on GitHub](https://img.shields.io/github/stars/yourusername/esports-news-poster?style=social)](https://github.com/yourusername/esports-news-poster)
 
 </div>
 
@@ -1230,18 +1224,18 @@ def normalize_title(title: str, lang: str = None) -> str:
 ## 🎬 ASCII Animation (для README.md)
 
 ```
-     🤖 AI NEWS POSTER v12.0
+     🎮 ESPORTS NEWS POSTER
     ╔════════════════════════╗
-    ║  RSS → AI → Telegram   ║
+    ║  RSS → Esports → Telegram   ║
     ╚════════════════════════╝
     
     [1] 📥 Загрузка RSS
-         ├─ TechCrunch ✅
-         ├─ VentureBeat ✅
-         └─ The Decoder ✅
+         ├─ HLTV ✅
+         ├─ Dot Esports ✅
+         └─ Cybersport.ru ✅
     
     [2] 🔍 Фильтрация
-         ├─ AI Score: 8 ✅
+         ├─ Esports Score: 8 ✅
          ├─ Promo: ❌
          └─ Corporate: ❌
     

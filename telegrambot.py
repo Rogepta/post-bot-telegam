@@ -38,7 +38,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s | %(levelname)s | %(message)s',
     handlers=[
-        logging.FileHandler("block_ai_poster.log", encoding="utf-8"),
+        logging.FileHandler("block_esports_poster.log", encoding="utf-8"),
         logging.StreamHandler()
     ]
 )
@@ -66,9 +66,9 @@ class Config:
 
         self.alternation_enabled = True
 
-        self.min_post_length = 600
+        self.min_post_length = 20
         self.max_article_age_hours = 720
-        self.min_ai_score = 1
+        self.min_esports_score = 1
         self.max_repeat_sentences = 2
 
         self.diversity_window = 8
@@ -131,65 +131,102 @@ GROQ_MODELS = [
 
 # ====================== RSS FEEDS ======================
 RSS_FEEDS = [
-    ("https://roskomsvoboda.org/feed/", "Роскомсвобода"),
-    ("https://rkn.gov.ru/rss/news.xml", "РКН"),
-    ("https://www.comnews.ru/rss/news", "ComNews"),
-    ("https://news.google.com/rss/search?q=блокировка+РКН+VPN+россия&hl=ru&gl=RU&ceid=RU:ru", "Google News (Блокировки)"),
-    ("https://techcrunch.com/category/artificial-intelligence/feed/", "TechCrunch AI"),
-    ("https://venturebeat.com/category/ai/feed/", "VentureBeat AI"),
-    ("https://arstechnica.com/tag/artificial-intelligence/feed/", "Ars Technica AI"),
-    ("https://www.wired.com/feed/tag/ai/latest/rss", "WIRED AI"),
-    ("https://the-decoder.com/feed/", "The Decoder"),
-    ("https://9to5google.com/guides/google-ai/feed/", "9to5Google AI"),
-    ("https://9to5mac.com/guides/apple-intelligence/feed/", "9to5Mac AI"),
-    ("https://www.zdnet.com/topic/artificial-intelligence/rss.xml", "ZDNet AI"),
-    ("https://www.technologyreview.com/topic/artificial-intelligence/feed", "MIT Tech Review AI"),
-    ("https://blog.google/technology/ai/rss/", "Google AI Blog"),
-    ("https://engineering.fb.com/category/ml-applications/feed/", "Meta AI Blog"),
-    ("https://kod.ru/rss", "Kod.ru"),
-    ("https://news.ycombinator.com/rss", "Hacker News"),
-    ("https://habr.com/ru/rss/feed/1cf1798b4d67ac63d1869bba8f26920f"
-     "?fl=ru&complexity=high&rating=10&types%5B%5D=article"
-     "&types%5B%5D=post&types%5B%5D=news", "Habr AI"),
+    # Англоязычные
+    ("https://www.hltv.org/rss/news", "HLTV"),
+    ("https://dotesports.com/feed", "Dot Esports"),
+    ("https://esportsinsider.com/feed/", "Esports Insider"),
+    ("https://www.dexerto.com/feed/", "Dexerto"),
+    ("https://estnn.com/feed/", "Esports.net"),
+    ("https://www.liquidsports.net/feed", "Liquid Sports"),
+    ("https://www.pcgamer.com/rss/", "PC Gamer"),
+    ("https://www.vg247.com/feed", "VG247"),
+    ("https://raw.githubusercontent.com/IceQ1337/CS-RSS-Feed/master/feeds/news-feed-en.xml", "CS News"),
+    # Русскоязычные
+    ("https://dota2.ru/news/rss/", "Dota2.ru"),
+    ("https://stopgame.ru/rss/rss_news.xml", "StopGame"),
+    ("https://kanobu.ru/rss/articles.full.xml", "Kanobu"),
+    ("https://www.playground.ru/rss/news.xml", "PlayGround"),
+    ("https://igromania.ru/rss/news.xml", "Igromania"),
 ]
 
 # ---------- КЛЮЧЕВЫЕ СЛОВА ----------
-AI_KEYWORDS_STRONG = [
-    "artificial intelligence", "machine learning", "deep learning",
-    "neural network", "llm", "large language model",
-    "chatgpt", "openai", "anthropic", "deepmind",
-    "gpt-4", "gpt-5", "gpt-4o", "claude", "gemini",
-    "midjourney", "dall-e", "stable diffusion", "sora",
-    "deepseek", "mistral", "llama", "grok",
-    "transformer", "diffusion model", "foundation model",
-    "generative ai", "gen ai",
-    "computer vision", "natural language processing",
-    "reinforcement learning", "ai safety", "agi",
-    "нейросеть", "нейросети", "искусственный интеллект",
-    "машинное обучение", "генеративный ии",
+ESPORTS_KEYWORDS_STRONG = [
+    # Дисциплины и соревнования
+    "киберспорт", "esports",
+    "чемпионат", "турнир", "лига", "матч", "финал", "major",
+    "the international", "worlds", "vct", "iem", "blast", "esl",
+    "dreamleague", "epicenter", "weplay", "pgl",
+    "qualifier", "квалификация",
+    "playoffs", "плей-офф",
+    "bracket", "сетка турнира",
+    "групповой этап", "group stage",
+    "relegation",
+    
+    # Конкретные игры (полные названия)
+    "dota 2", "dota2", "counter-strike", "cs:go", "cs2",
+    "league of legends", "lol", "valorant",
+    "rainbow six siege", "r6", "overwatch", "ow2",
+    "apex legends", "fortnite", "pubg", "call of duty",
+    "rocket league", "starcraft 2", "sc2", "starcraft",
+    "street fighter", "sf6", "tekken 8", "tekken",
+    "super smash", "melee", "guilty gear", "fgc",
+    
+    # Команды (теги)
+    "team spirit", "navi", "virtus.pro", "g2 esports",
+    "fnatic", "cloud9", "og", "team liquid", "faze clan",
+    "mouz", "nip", "astralis", "heroic", "ence",
+    "tundra", "betboom", "parivision", "tsm",
+    "kcorp", "karmine corp", "falcons", "spirit",
+    "mibr", "furia", "pain", "imperial", "9z",
+    
+    # Игровые обновления
+    "патч", "обновление", "пачноут", "баланс", "герой",
+    "карта", "оружие", "персонаж", "ребаланс", "нерф",
+    
+    # Игроки/стримеры (можно добавить конкретных, если нужно)
+    "игрок", "капитан", "тренер", "состав", "ростер",
+    "трансфер", "подписание", "стендин", "замена",
 ]
 
-AI_KEYWORDS_WEAK = [
-    "ai", "nvidia", "copilot", "generative",
-    "multimodal", "reasoning", "inference", "embedding",
-    "robotics", "humanoid", "automation",
-    "nlp", "ai model", "ai training",
-    "бот", "боты", "автоматизация",
-    "нейро", "ии",
+ESPORTS_KEYWORDS_WEAK = [
+    # Общие игровые термины
+    "игра", "геймер", "стример", "стрим",
+    "призовой", "призовые", "деньги", "приз",
+    "полуфинал", "четвертьфинал", "групповой", "плей-офф",
+    "винрейт", "мета", "стратегия", "тактика",
+    "карта", "режим", "ивент", "ивент",
+    
+    # Жанры и платформы
+    "шутер", "моба", "баттл-рояль", "стратегия",
+    "pc", "консоль", "ps5", "xbox",
+    
+    # Околоигровое
+    "разработчик", "паблишер", "релиз", "запуск",
+    "игровая", "игровой", "игровое",
+    
+    # Дополнительно на английском
+    "champion", "winner", "defeat", "roster", "stand-in",
+    "meta", "winrate", "pick", "ban", "draft",
+    
+    # Результаты и репортажи
+    "highlight", "хайлайт", "счёт", "score", "результат",
+    "итоги", "overview", "recap", "roundup",
+    "коэффициент", "прогноз", "предматчевый",
+    "preview", "look back", "взгляд назад",
 ]
 
-BLOCK_KEYWORDS = [
-    "блокировка", "заблокирован", "реестр ркн", "roskomnadzor", "rkn",
-    "обход блокировок", "dpi", "замедление трафика", "sniffing",
-    "vless", "v2ray", "xray", "wireguard", "openvpn", "amnezia",
-    "белый список", "whitelist", "прокси", "туннелирование",
-    "utls", "fragment", "антизапрет", "antizapret",
-    "замедление youtube", "замедление ютуб",
-]
-
-GAMES_EXCLUDE = [
-    "ps5", "xbox", "nintendo", "game review", "baldur's gate", "roblox", "esports",
-    "twitch streamer", "fortnite", "игра", "игровая", "гейминг", "киберспорт"
+HARD_EXCLUDE_KEYWORDS = [
+    "блокчейн", "nft", "криптовалюта", "крипто",
+    "политика", "выборы", "коронавирус", "covid",
+    "промокод", "скидка", "распродажа", "бонус",
+    "реферальный", "букмекер", "ставки", "казино",
+    
+    # Не игровое — кино, сериалы, шоу
+    "сериал", "сериалы", "k-pop", "kpop", "айдол", "idol",
+    "dc вселенная", "dc universe", "marvel",
+    "apple tv", "netflix",
+    "кинотеатр", "кинопремьера", "кассовые сборы",
+    "рецензия на фильм",
 ]
 
 BUSINESS_EXCLUDE = [
@@ -216,10 +253,6 @@ JUNK_KEYWORDS = [
     "вакансия", "резюме", "работа", "сотрудник", "нанимает", "hr", "рекрутинг"
 ]
 
-# ====================== ГЕО-ФИЛЬТР (теперь только для блокировок, для AI не используется) ======================
-RUSSIA_KEYWORDS = ["россия", "рф", "минц", "госдума", "путин", "москва", "санкт-петербург", "совет федерации", "кремль", "правительство рф", "роскомнадзор", "ркн"]
-
-
 @dataclass
 class Article:
     title: str
@@ -230,48 +263,77 @@ class Article:
 
 
 class Topic:
-    LLM = "llm"
-    IMAGE_GEN = "image_gen"
-    ROBOTICS = "robotics"
-    HARDWARE = "hardware"
-    MESSENGER = "messenger"
+    DOTA = "dota"
+    CS = "cs"
+    VALORANT = "valorant"
+    ESPORTS = "esports"
+    PATCH = "patch"
     GENERAL = "general"
-    BLOCK = "block"
-    BYPASS = "bypass"
-    WHITELIST = "whitelist"
 
     HASHTAGS = {
-        LLM: "#ChatGPT #LLM #OpenAI #нейросети",
-        IMAGE_GEN: "#Midjourney #StableDiffusion #ИИАрт",
-        ROBOTICS: "#роботы #робототехника #автоматизация",
-        HARDWARE: "#NVIDIA #чипы #GPU",
-        MESSENGER: "#Telegram #мессенджеры #боты",
-        GENERAL: "#ИИ #технологии #AI",
-        BLOCK: "#РКН #блокировки #цензура",
-        BYPASS: "#блокировки #цензура",
-        WHITELIST: "#белыйсписок #доступность",
+        DOTA: "#Dota2 #дота2 #киберспорт",
+        CS: "#CS2 #CSGO #контрстрайк",
+        VALORANT: "#Valorant #валорант",
+        ESPORTS: "#киберспорт #esports #турнир",
+        PATCH: "#патч #обновление #пачноут",
+        GENERAL: "#игры #гейминг #видеоигры",
     }
 
     @staticmethod
     def detect(text: str) -> str:
         t = text.lower()
-        if any(x in t for x in ["блокировк", "ркн", "roskomnadzor", "заблокирован", "реестр"]):
-            return Topic.BLOCK
-        if any(x in t for x in ["vless", "v2ray", "xray", "wireguard", "обход", "dpi", "антизапрет"]):
-            return Topic.BYPASS
-        if any(x in t for x in ["белый список", "whitelist", "доступность сайта"]):
-            return Topic.WHITELIST
-        if any(x in t for x in ["telegram", "телеграм", "мессенджер", "durov"]):
-            return Topic.MESSENGER
-        if any(x in t for x in ["gpt", "claude", "gemini", "llm", "chatgpt", "llama"]):
-            return Topic.LLM
-        if any(x in t for x in ["dall-e", "midjourney", "stable diffusion", "sora"]):
-            return Topic.IMAGE_GEN
-        if any(x in t for x in ["robot", "humanoid", "boston dynamics"]):
-            return Topic.ROBOTICS
-        if any(x in t for x in ["nvidia", "chip", "gpu", "hardware"]):
-            return Topic.HARDWARE
+        if any(x in t for x in ["dota 2", "dota2", "дота", "the international"]):
+            return Topic.DOTA
+        if re.search(r'\bti\b', t):
+            return Topic.DOTA
+        if any(x in t for x in ["counter-strike", "cs:go", "cs2", "cs go", "контрстрайк", "hltv"]):
+            return Topic.CS
+        if any(x in t for x in ["valorant", "валорант", "vct"]):
+            return Topic.VALORANT
+        if any(x in t for x in ["киберспорт", "esports", "турнир", "чемпионат", "лига", "матч", "major", "iem", "blast", "esl"]):
+            return Topic.ESPORTS
+        if any(x in t for x in ["патч", "пачноут", "обновление", "баланс", "нерф", "ребаланс"]):
+            return Topic.PATCH
         return Topic.GENERAL
+
+
+class Subject:
+    DOTA = "dota"
+    CS = "cs"
+    VALORANT = "valorant"
+    ESPORTS = "esports"
+    PATCH = "patch"
+    GENERAL = "general"
+    OTHER = "other"
+
+    @staticmethod
+    def detect(text: str) -> str:
+        t = text.lower()
+
+        # Конкретные турниры/ивенты — максимально узкий subject для кулдауна
+        if re.search(r'\bti\b', t) or "the international" in t:
+            return "the_international"
+        if "dreamleague" in t:
+            return "dreamleague"
+        if "iem" in t:
+            return "iem"
+        if "blast" in t:
+            return "blast"
+        if "vct" in t:
+            return "vct"
+        if "pgl" in t:
+            return "pgl"
+        if "epicenter" in t:
+            return "epicenter"
+        if "weplay" in t:
+            return "weplay"
+        if "hltv" in t:
+            return "hltv"
+        if "major" in t:
+            return "major"
+
+        # Если турнир не определился — возвращаем Topic (игра/тематика)
+        return Topic.detect(text)
 
 
 # ---------- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----------
@@ -404,32 +466,18 @@ def safe_json_loads(value: str, default=None):
 
 
 # ====================== СКОРЫ ======================
-def ai_relevance_score(text: str) -> int:
+def esports_relevance_score(text: str) -> int:
     text_lower = text.lower()
     score = 0
-    for kw in AI_KEYWORDS_STRONG:
+    for kw in ESPORTS_KEYWORDS_STRONG:
         if kw in text_lower:
             score += 2
-    for kw in AI_KEYWORDS_WEAK:
+    for kw in ESPORTS_KEYWORDS_WEAK:
         if kw in text_lower:
             score += 1
-    if score == 0 and ("ai" in text_lower or "нейросеть" in text_lower or "ии" in text_lower):
+    if score == 0 and ("esports" in text_lower or "киберспорт" in text_lower):
         score = 1
     return score
-
-
-def block_relevance_score(text: str) -> int:
-    text_lower = text.lower()
-    score = 0
-    for kw in BLOCK_KEYWORDS:
-        if kw in text_lower:
-            score += 5
-    return score
-
-
-def is_russian_related(text: str) -> bool:
-    text_lower = text.lower()
-    return any(kw in text_lower for kw in RUSSIA_KEYWORDS)
 
 
 def is_promo_content(text: str) -> bool:
@@ -452,8 +500,8 @@ def is_relevant(article: Article) -> bool:
         logger.info(f"  ⏰ TOO_OLD ({age_hours:.0f}h): {article.title[:50]}")
         return False
 
-    if any(g in text for g in GAMES_EXCLUDE):
-        logger.info(f"  🎮 GAME: {article.title[:50]}")
+    if any(h in text for h in HARD_EXCLUDE_KEYWORDS):
+        logger.info(f"  🚫 HARD_EXCLUDE: {article.title[:50]}")
         return False
 
     if any(b in text for b in BUSINESS_EXCLUDE):
@@ -469,27 +517,21 @@ def is_relevant(article: Article) -> bool:
         return False
 
     if any(rw in text for rw in REVIEW_KEYWORDS):
-        if not any(kw in text for kw in AI_KEYWORDS_STRONG):
-            logger.info(f"  📝 REVIEW/DEAL (нет сильного AI): {article.title[:50]}")
+        if not any(kw in text for kw in ESPORTS_KEYWORDS_STRONG):
+            logger.info(f"  📝 REVIEW/DEAL: {article.title[:50]}")
             return False
 
-    has_strong_ai = any(kw in text for kw in AI_KEYWORDS_STRONG)
-    has_weak_ai = any(kw in text for kw in AI_KEYWORDS_WEAK)
-    is_ai = has_strong_ai or (has_weak_ai and config.min_ai_score <= 1)
-    is_block = any(kw in text for kw in BLOCK_KEYWORDS)
+    has_strong_esports = any(kw in text for kw in ESPORTS_KEYWORDS_STRONG)
+    has_weak_esports = any(kw in text for kw in ESPORTS_KEYWORDS_WEAK)
+    is_esports = has_strong_esports or (has_weak_esports and config.min_esports_score <= 1)
 
-    # Блок-новости всегда пропускаем
-    if is_block:
-        logger.info(f"  ✅ BLOCK (приоритет): {article.title[:55]}")
+    # Игровые новости пропускаем
+    if is_esports:
+        logger.info(f"  ✅ ESPORTS: {article.title[:55]}")
         return True
 
-    # Для AI-новостей: убираем географический фильтр – публикуем любые AI-новости
-    if is_ai:
-        logger.info(f"  ✅ AI (без гео-фильтра): {article.title[:55]}")
-        return True
-
-    # Если не AI и не блок – отсекаем
-    logger.info(f"  🚫 NEITHER AI NOR BLOCK: {article.title[:50]}")
+    # Если не игры – отсекаем
+    logger.info(f"  🚫 NOT ESPORTS: {article.title[:50]}")
     return False
 
 
@@ -643,7 +685,7 @@ class PostedManager:
         new_title: str,
         new_entities: Set[str] = None
     ) -> Tuple[bool, str]:
-        if subject == "other":
+        if subject == Subject.OTHER:
             return True, ""
 
         recent_posts = self.get_subject_posts_in_window(subject, config.subject_window_hours)
@@ -791,7 +833,7 @@ class PostedManager:
 
             return True, ""
 
-    def add(self, article: Article, topic: str = Topic.GENERAL, subject: str = "other") -> bool:
+    def add(self, article: Article, topic: str = Topic.GENERAL, subject: str = Subject.OTHER) -> bool:
         with self._lock:
             conn = self._get_conn()
             cursor = conn.cursor()
@@ -1002,9 +1044,9 @@ def filter_and_dedupe(articles: List[Article], posted: PostedManager) -> List[Ar
             continue
 
         text = f"{article.title} {article.summary}"
-        subject = Topic.detect(text)
+        subject = Subject.detect(text)
 
-        if subject != "other" and batch_subject_counts[subject] >= config.batch_subject_limit:
+        if subject != Subject.OTHER and batch_subject_counts[subject] >= config.batch_subject_limit:
             logger.info(f"  ⏭️ BATCH_SUBJECT_LIMIT ({subject}, {batch_subject_counts[subject]} in batch): {article.title[:50]}")
             stats["batch_subject"] += 1
             continue
@@ -1022,7 +1064,7 @@ def filter_and_dedupe(articles: List[Article], posted: PostedManager) -> List[Ar
             stats["db_dup"] += 1
             continue
 
-        topic = subject
+        topic = Topic.detect(text)
         div_ok, div_reason = posted.check_diversity(topic, article.source)
         if not div_ok:
             logger.info(f"  ⏭️ DIVERSITY ({div_reason}): {article.title[:50]}")
@@ -1038,23 +1080,10 @@ def filter_and_dedupe(articles: List[Article], posted: PostedManager) -> List[Ar
         candidates.append(article)
         stats["passed"] += 1
 
-    block_candidates = []
-    ai_candidates = []
-    for art in candidates:
-        text = f"{art.title} {art.summary}".lower()
-        if any(kw in text for kw in BLOCK_KEYWORDS):
-            block_candidates.append(art)
-        else:
-            ai_candidates.append(art)
-
-    if block_candidates:
-        logger.info(f"🔒 Найдено {len(block_candidates)} блок-статей, берём их в приоритет")
-        block_candidates.sort(key=lambda a: block_relevance_score(f"{a.title} {a.summary}"), reverse=True)
-        candidates = block_candidates
-    else:
-        logger.info(f"🌐 Блок-новостей нет, берём AI-статьи (без гео-фильтра)")
-        ai_candidates.sort(key=lambda a: ai_relevance_score(f"{a.title} {a.summary}"), reverse=True)
-        candidates = ai_candidates[:5]
+    esports_candidates = list(candidates)
+    logger.info(f"🌐 Сортируем игровые статьи по релевантности")
+    esports_candidates.sort(key=lambda a: esports_relevance_score(f"{a.title} {a.summary}"), reverse=True)
+    candidates = esports_candidates[:5]
 
     candidates = interleave_by_source(candidates)
 
@@ -1096,15 +1125,6 @@ def rotate_candidates(candidates: List[Article], posted: PostedManager) -> List[
     return result if result else candidates[:1]
 
 
-DISCLAIMER = (
-    "\n\n⚠️ Отдельные организации, упомянутые в данном материале, могут иметь статус "
-    "«нежелательных» на территории РФ. Актуальный перечень размещён на официальном сайте "
-    'Минюста РФ: <a href="https://minjust.gov.ru/ru/pages/perechen-inostrannyh-i-'
-    'mezhdunarodnyh-organizacij-deyatelnost-kotoryh-priznana-nezhelatelnoj-na-territorii-'
-    'rossiyskoy-federacii/">minjust.gov.ru</a>'
-)
-
-
 def has_repeated_sentences(text: str, max_repeats: int = 2) -> bool:
     sentences = re.split(r'[.!?]\s+', text)
     sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
@@ -1128,42 +1148,21 @@ async def generate_summary(article: Article) -> Optional[str]:
     logger.info(f"📝 Генерация: {article.title[:55]}...")
     text_for_topic = f"{article.title} {article.summary}"
     topic = Topic.detect(text_for_topic)
-    is_block_topic = any(kw in text_for_topic.lower() for kw in BLOCK_KEYWORDS)
+    prompt = f"""Ты — редактор Telegram-канала про киберспорт и видеоигры. Перепиши новость коротко и строго по фактам из статьи, ничего не додумывая.
 
-    if is_block_topic:
-        prompt = f"""Ты — редактор Telegram-канала про блокировки и цифровые ограничения в РФ. Напиши краткий пост по новости.
-
-НОВОСТЬ:
+СТАТЬЯ:
 Заголовок: {article.title}
 Содержание: {article.summary[:2000]}
 Источник: {article.source}
 
-Напиши пост в нейтральном, информативном тоне:
-- Что произошло? (факты: кто, что, когда, как)
-- Какие последствия для пользователей или индустрии?
-- Не добавляй своего мнения, критики или оценок.
-- Не используй слова «власть», «правительство», «путин» и т.п. – просто опиши событие технически.
-- Не задавай вопросов читателям.
-- Пиши кратко, по делу, живым языком.
+Правила:
+- Только факты из статьи, ничего не добавляй и не меняй
+- Сохрани результат матча, счёт, названия команд в точности как в статье
+- Кратко: 2–4 предложения, только суть
+- Без оценок, мнений, вопросов и рассуждений
+- Без маркдауна
 
-Длина: 600–800 символов.
-ПОСТ:"""
-    else:
-        prompt = f"""Ты — редактор Telegram-канала про AI и технологии. Напиши краткий пост по новости.
-
-НОВОСТЬ:
-Заголовок: {article.title}
-Содержание: {article.summary[:2000]}
-Источник: {article.source}
-
-Напиши пост в нейтральном, информативном тоне:
-- Что произошло? (суть события)
-- Почему это важно? (для кого и зачем)
-- Без оценок, критики и лишних эмоций.
-- Без вопросов к читателям.
-- Пиши кратко, по делу, живым языком.
-
-Длина: 700–900 символов.
+Длина: 80–300 символов.
 ПОСТ:"""
 
     water_phrases = [
@@ -1186,13 +1185,13 @@ async def generate_summary(article: Article) -> Optional[str]:
                 resp = await asyncio.to_thread(
                     groq_client.chat.completions.create,
                     model=model,
-                    temperature=0.7,
+                    temperature=0.2,
                     max_tokens=1200,
                     messages=[{"role": "user", "content": prompt}],
                 )
                 text = resp.choices[0].message.content.strip()
 
-                if not is_block_topic and "SKIP" in text.upper()[:10]:
+                if "SKIP" in text.upper()[:10]:
                     logger.info("  ⏭️ SKIP (не подходит)")
                     return None
 
@@ -1230,7 +1229,7 @@ async def generate_summary(article: Article) -> Optional[str]:
 
                 hashtags = Topic.HASHTAGS.get(topic, Topic.HASHTAGS[Topic.GENERAL])
                 source_link = f'\n\n🔗 <a href="{article.link}">Источник</a>'
-                final = f"{text}\n\n{hashtags}{source_link}{DISCLAIMER}"
+                final = f"{text}\n\n{hashtags}{source_link}"
                 logger.info(f"  ✅ [{model}]: {len(text)} симв.")
                 return final
 
@@ -1247,8 +1246,9 @@ async def generate_summary(article: Article) -> Optional[str]:
 
 
 async def post_article(article: Article, text: str, posted: PostedManager) -> bool:
-    topic = Topic.detect(f"{article.title} {article.summary}")
-    subject = topic
+    article_text = f"{article.title} {article.summary}"
+    topic = Topic.detect(article_text)
+    subject = Subject.detect(article_text)
 
     try:
         logger.info("  📤 Отправка поста...")
@@ -1308,7 +1308,7 @@ async def main():
         f.write(str(os.getpid()))
 
     logger.info("=" * 60)
-    logger.info("🚀 БЛОКИРОВКИ + AI (простой пересказ новостей)")
+    logger.info("🚀 КИБЕРСПОРТ (пересказ новостей)")
     logger.info("=" * 60)
 
     posted = None
