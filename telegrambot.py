@@ -3,6 +3,12 @@
 
 import os
 import json
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import asyncio
 import random
 import re
