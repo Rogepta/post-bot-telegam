@@ -127,11 +127,15 @@ python telegrambot.py
 ### requirements.txt
 
 ```txt
-aiogram==3.4.1
-aiohttp==3.9.1
-feedparser==6.0.11
-groq==0.4.2
-python-dotenv==1.0.0  # опционально
+requests>=2.33.0
+python-dotenv>=1.0.1
+aiohttp>=3.14.0
+feedparser>=6.0.11
+aiogram>=3.17.0
+groq
+beautifulsoup4>=4.12.3
+lxml>=6.1.0
+
 ```
 
 ---
